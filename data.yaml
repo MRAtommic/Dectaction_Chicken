@@ -1,0 +1,17 @@
+path: 'C:\Users\FEWIT\Desktop\AI Detaction'
+
+train: 
+  - chicken/train/images
+  - human/train/images
+
+val: 
+  - chicken/valid/images
+  - human/valid/images
+
+test: 
+  - chicken/test/images
+  - human/test/images
+
+nc: 2
+
+names: ['chicken', 'human']
