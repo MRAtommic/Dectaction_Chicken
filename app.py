@@ -39,8 +39,9 @@ if uploaded_video is not None and model is not None:
     
     # สร้างคอลัมน์สำหรับแสดงสถิติแยกกัน
     col1, col2 = st.columns(2)
-    human_stat = col1.empty()
-    chicken_stat = col2.empty()
+    chicken_stat = col1.empty()
+    human_stat = col2.empty()
+
     
     frame_count = 0
 
@@ -83,6 +84,7 @@ if uploaded_video is not None and model is not None:
     cap.release()
     os.remove(tfile.name)
     st.success("ประมวลผลวิดีโอเสร็จสิ้น")
+
 
 
 
