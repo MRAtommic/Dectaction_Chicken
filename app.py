@@ -64,8 +64,8 @@ if uploaded_video is not None and model is not None:
             detected_classes = results[0].boxes.cls.cpu().numpy()
             
             # นับจำนวนแต่ละคลาส
-            num_humans = np.count_nonzero(detected_classes == 0)
-            num_chickens = np.count_nonzero(detected_classes == 1)
+            num_humans = np.count_nonzero(detected_classes == 1)
+            num_chickens = np.count_nonzero(detected_classes == 0)
             
             # วาดผลลัพธ์ลงบนภาพ
             annotated_frame = results[0].plot()
@@ -82,3 +82,4 @@ if uploaded_video is not None and model is not None:
     cap.release()
     os.remove(tfile.name)
     st.success("ประมวลผลวิดีโอเสร็จสิ้น")
+
