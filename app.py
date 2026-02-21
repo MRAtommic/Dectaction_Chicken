@@ -71,8 +71,9 @@ if uploaded_video is not None and model is not None:
             annotated_frame = results[0].plot()
             
             # อัปเดตหน้าจอ (Metric)
-            human_stat.metric("จำนวนคน", f"{num_humans} ราย")
+            
             chicken_stat.metric("จำนวนไก่", f"{num_chickens} ตัว")
+            human_stat.metric("จำนวนคน", f"{num_humans} ราย")
             
             # แสดงวิดีโอ
             st_frame.image(annotated_frame, channels="BGR", use_container_width=True)
@@ -82,5 +83,6 @@ if uploaded_video is not None and model is not None:
     cap.release()
     os.remove(tfile.name)
     st.success("ประมวลผลวิดีโอเสร็จสิ้น")
+
 
 
