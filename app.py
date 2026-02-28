@@ -65,15 +65,26 @@ if uploaded_video is not None:
             break
 
         # ประมวลผลเฉพาะเฟรมที่กำหนดเพื่อลดภาระ CPU
+            # --- ส่วนที่ควรแก้ใน loop while cap.isOpened() ---
+
         if frame_count % skip_frames == 0:
-            # ทำการตรวจจับ
+            # 1. ลดขนาดภาพก่อนส่งให้ AI (ช่วยได้เยอะมาก!)
+            small_frame = cv2.resize(frame, (img_size, img_size))
+            
             results = model.predict(
-                frame, 
+                small_frame, 
                 conf=conf_threshold, 
                 imgsz=img_size, 
-                half=False, # บน CPU ไม่แนะนำให้ใช้ half=True
+                half=False, 
                 verbose=False
             )
+            
+            # 2. นับจำนวน (ข้ามส่วนนี้ถ้าอยากให้เร็วสุดๆ)
+            # ... (โค้ดนับจำนวนเดิม) ...
+
+            # 3. แสดงผลเฉพาะเฟรมที่ AI ตรวจจับเสร็จ
+            annotated_frame = results[0].plot()
+            st_frame.image(annotated_frame, channels="BGR", use_container_width=True)
             
             # นับจำนวนคลาสแบบ Dynamic
             names = model.names
@@ -103,3 +114,4 @@ if uploaded_video is not None:
     cap.release()
     os.remove(tfile.name)
     st.success("🎯 ประมวลผลวิดีโอเสร็จเรียบร้อย!")
+
